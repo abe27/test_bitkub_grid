@@ -9,8 +9,8 @@ class GridTrader:
         self.API_SECRET_KEY = os.getenv("API_SECRET_KEY")
         self.SYMBOL = os.getenv("SYMBOL")
         self.GRID_LEVEL = int(os.getenv("GRID_LEVEL"))/2
-        self.LOWER_PRICE = float(os.getenv("LOWER_PRICE"))
-        self.UPPER_PRICE = float(os.getenv("UPPER_PRICE"))
+        self.LOWER_PRICE = int(os.getenv("LOWER_PRICE"))
+        self.UPPER_PRICE = int(os.getenv("UPPER_PRICE"))
         self.COST = float(os.getenv("COST"))
         self.AMOUNT = float(self.COST/(self.GRID_LEVEL*2))
         self.EXCHANGE = Bitkub(api_key=self.API_KEY, api_secret=self.API_SECRET_KEY)
