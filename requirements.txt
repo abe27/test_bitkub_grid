@@ -1,0 +1,7 @@
+bitkub==1.1.0
+certifi @ file:///croot/certifi_1669749558946/work/certifi
+charset-normalizer==3.0.1
+idna==3.4
+python-dotenv==0.21.1
+requests==2.28.2
+urllib3==1.26.14
