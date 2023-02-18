@@ -22,9 +22,15 @@ def main():
             if abs(price.as_tuple().exponent) > 0:
                 digit = float("0." + str(g.LOWER_PRICE).zfill(abs(price.as_tuple().exponent)))
 
-            pipBuy = round(float(price) - digit, abs(price.as_tuple().exponent))
-            pipSell = round(float(price) + digit, abs(price.as_tuple().exponent))
-            print(f"{symbol}:::{price} ==> buy: {pipBuy} sell: {pipSell}")
+            pipBuy = []
+            for p in range(g.GRID_LEVEL):
+                pipBuy.append(round(float(price) - (digit * (p+1)), abs(price.as_tuple().exponent)))
+
+            pipSell = []
+            for p in range(g.GRID_LEVEL):
+                pipSell.append(round(float(price) + (digit * (p+1)), abs(price.as_tuple().exponent)))
+
+            print(f"{symbol}:::{price}\nbuy: {pipBuy}\nsell: {pipSell}\n\n")
 
 if __name__ == "__main__":
     main()

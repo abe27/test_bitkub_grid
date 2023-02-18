@@ -8,7 +8,7 @@ class GridTrader:
         self.API_KEY = os.getenv("API_KEY")
         self.API_SECRET_KEY = os.getenv("API_SECRET_KEY")
         self.SYMBOL = os.getenv("SYMBOL")
-        self.GRID_LEVEL = int(os.getenv("GRID_LEVEL"))/2
+        self.GRID_LEVEL = round(int(os.getenv("GRID_LEVEL"))/2)
         self.LOWER_PRICE = int(os.getenv("LOWER_PRICE"))
         self.UPPER_PRICE = int(os.getenv("UPPER_PRICE"))
         self.COST = float(os.getenv("COST"))
