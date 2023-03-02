@@ -1,5 +1,19 @@
 import os
 from bitkub import Bitkub
+from binance.client import Client
+
+class OwnerBinance:
+    def __init__(self):
+        self.BINANCE_API_KEY = os.environ.get('BINANCE_API_KEY')
+        self.BINANCE_SECRET_KEY = os.environ.get('BINANCE_SECRET_KEY')
+        self.OWNER_BINANCE = Client(self.BINANCE_API_KEY, self.BINANCE_SECRET_KEY)
+        pass
+
+    def get_all_price(self):
+        list = self.OWNER_BINANCE.get_all_tickers()
+        for i in list:
+            print(i)
+        pass
 
 class GridTrader:
     order_list = []
