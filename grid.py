@@ -1,4 +1,6 @@
 import os
+import requests
+import json
 from bitkub import Bitkub
 from binance.client import Client
 
@@ -14,6 +16,20 @@ class OwnerBinance:
         for i in list:
             print(i)
         pass
+    def get_price(self, symbol="BTC"):
+        pair = ["USD","BUSD", "USDT", "EUR", "AUD","NGN","RUB", "GBP","TRY"]
+        for i in pair:
+            url = f"https://api.binance.com/api/v3/ticker/price?symbol={symbol}{i}"
+            headers = {
+                'Content-Type': 'application/json'
+            }
+            response = requests.request("GET", url, headers=headers)
+            if response.ok:
+                price = response.json()
+                print(price)
+                # return float(price["price"]) * 37.5154
+
+        return 0
 
 class GridTrader:
     order_list = []
@@ -23,8 +39,8 @@ class GridTrader:
         self.API_SECRET_KEY = os.getenv("API_SECRET_KEY")
         self.SYMBOL = os.getenv("SYMBOL")
         self.GRID_LEVEL = round(int(os.getenv("GRID_LEVEL"))/2)
-        self.LOWER_PRICE = int(os.getenv("LOWER_PRICE"))
-        self.UPPER_PRICE = int(os.getenv("UPPER_PRICE"))
+        self.LOWER_PRICE = float(os.getenv("LOWER_PRICE"))
+        self.UPPER_PRICE = float(os.getenv("UPPER_PRICE"))
         self.COST = float(os.getenv("COST"))
         self.AMOUNT = float(self.COST/(self.GRID_LEVEL*2))
         self.EXCHANGE = Bitkub(api_key=self.API_KEY, api_secret=self.API_SECRET_KEY)
