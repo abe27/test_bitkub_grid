@@ -56,31 +56,32 @@ class GridTrader:
         lst = []
         for s in self.SYMBOLS['result']:
             symbol = s['symbol']
-            p = self.ticker(sym=symbol)
-            if len(p) > 0:
-                if p[symbol]["last"] >= 1:
-                    price = p[symbol]["last"]
-                    cost = round(price * self.GRID_LEVEL, 2)
-                    baseVolume = p[symbol]['baseVolume']
-                    quoteVolume = p[symbol]['quoteVolume']
-                    if cost <= self.COST and baseVolume > 100000:
-                        sellVolume = []
-                        for r in range(round(self.GRID_LEVEL)):
-                            sellVolume.append(round(price+(self.UPPER_PRICE * (r + 1)), 2))
+            lst.append({'symbol': str(symbol).replace("THB_", ""),})
+            # p = self.ticker(sym=symbol)
+            # if len(p) > 0:
+            #     if p[symbol]["last"] >= 1:
+            #         price = p[symbol]["last"]
+            #         cost = round(price * self.GRID_LEVEL, 2)
+            #         baseVolume = p[symbol]['baseVolume']
+            #         quoteVolume = p[symbol]['quoteVolume']
+            #         if cost <= self.COST and baseVolume > 100000:
+            #             sellVolume = []
+            #             for r in range(round(self.GRID_LEVEL)):
+            #                 sellVolume.append(round(price+(self.UPPER_PRICE * (r + 1)), 2))
 
-                        openVolume = []
-                        for r in range(round(self.GRID_LEVEL)):
-                            openVolume.append(round(price-(self.LOWER_PRICE * (r + 1)), 2))
+            #             openVolume = []
+            #             for r in range(round(self.GRID_LEVEL)):
+            #                 openVolume.append(round(price-(self.LOWER_PRICE * (r + 1)), 2))
 
-                        lst.append({
-                            'symbol': str(symbol).replace("THB_", ""),
-                            'price': price,
-                            'cost': cost,
-                            'base': baseVolume,
-                            'quote': quoteVolume,
-                            'open': openVolume,
-                            'sell': sellVolume
-                        })
+            #             lst.append({
+            #                 'symbol': str(symbol).replace("THB_", ""),
+            #                 'price': price,
+            #                 'cost': cost,
+            #                 'base': baseVolume,
+            #                 'quote': quoteVolume,
+            #                 'open': openVolume,
+            #                 'sell': sellVolume
+            #             })
         return lst
 
     def place_order(self):

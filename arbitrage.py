@@ -10,9 +10,12 @@ binn = OwnerBinance()
 
 def main():
     # print(g.EXCHANGE.status())
-    # doc = g.list_ticker()
-    # for s in doc:
-    #     print(s)
+    bLst = []
+    doc = g.list_ticker()
+    for s in doc:
+        bLst.append(s['symbol'])
+    bLst.sort()
+    print(bLst)
 
     # binn.get_all_price()
     doc = g.SYMBOLS
